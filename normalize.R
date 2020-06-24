@@ -10,7 +10,7 @@
 calc_cpm <- function (expr_mat, spikes = NULL) # spikes must be integer, not logical vector
 { 
   norm_factor <- colSums( expr_mat ) 
-  return( t( t( expr_mat ) / norm_factor ) ) * 10^6 
+  return( t( t( expr_mat ) / norm_factor ) * 10^6 ) 
 }
 
 calc_sf <- function (expr_mat) { 
@@ -55,15 +55,14 @@ Down_Sample_Matrix <- function(expr_mat) {
   return(expr_mat)
 }
 
-scran_normilize <- function(expr_mat){
+scran_normalize <- function(expr_mat){
   require(scran, quietly = TRUE)
-  keep_cols = colSums(expr_mat) > 0
-  non_zero = expr_mat[,keep_cols]
-  qclust <- quickCluster(non_zero, min.size = 30)
-  non_zero <- computeSumFactors(non_zero, sizes = 15, clusters = qclust)
-  expr_mat[,keep_cols] <- normalize(non_zero)
+  
+  qclust <- quickCluster(expr_mat, min.size = 30)
+  expr_mat <- calculateSumFactors(expr_mat, sizes = 15, clusters = qclust)
+  
   return(expr_mat)
 }
 
-# scran_normilize(matrix(raw,20,600))
-test = Down_Sample_Matrix(raw)
+# scran_normalize(as.matrix(raw2))
+# cmp = calc_cpm(raw)
