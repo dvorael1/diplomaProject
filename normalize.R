@@ -45,13 +45,31 @@ Down_Sample_Matrix <- function(expr_mat) {
   keep_cols = colSums(expr_mat) > 0
   non_zero = expr_mat[,keep_cols]
   min_lib_size <- min(colSums(non_zero))
+  
   down_sample <- function(x) {
     prob <- min_lib_size/sum(x)
     return(
       sapply(x, function(y) { rbinom(1, y, prob) } )
     ) }
+  
   down_sampled_mat <- apply(non_zero, 2, down_sample)
   expr_mat[,keep_cols] = down_sampled_mat
+  return(expr_mat)
+}
+
+Up_Down_Sample_Matrix <- function(expr_mat) {
+  keep_cols = colSums(expr_mat) > 0
+  non_zero = expr_mat[,keep_cols]
+  min_lib_size <- min(colSums(non_zero))
+  
+  up_down_sample <- function(x) {
+    prob <- min_lib_size/sum(x)
+    return(
+      sapply(x, function(y) { rbinom(1, y*1000, prob) } )
+    ) }
+  
+  up_down_sampled_mat <- apply(non_zero, 2, up_down_sample)
+  expr_mat[,keep_cols] = up_down_sampled_mat
   return(expr_mat)
 }
 
