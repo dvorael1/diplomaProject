@@ -57,15 +57,32 @@ Down_Sample_Matrix <- function(expr_mat) {
   return(expr_mat)
 }
 
-Up_Down_Sample_Matrix <- function(expr_mat) {
+Up_Down_Sample_Matrix <- function(expr_mat,scale=1000) {
+
   keep_cols = colSums(expr_mat) > 0
   non_zero = expr_mat[,keep_cols]
+  
+  non_zero@x = non_zero@x + rnorm(length(non_zero@x),mean = 0, sd = 0.5)
+  
   min_lib_size <- min(colSums(non_zero))
   
   up_down_sample <- function(x) {
     prob <- min_lib_size/sum(x)
     return(
-      sapply(x, function(y) { rbinom(1, y*1000, prob) } )
+      sapply(x, function(y) { 
+        if(y<0.5){
+          return(0)
+        }
+        if(prob >= 1){
+          prob = 1
+        }
+        return(rbinom(1, round(y*scale), prob))
+        
+        # if( is.na(t)){
+        #   print(paste("prob:",prob,"y:",y, "min",min_lib_size,"sum",sum(x)))
+        # }
+        #   return(t)
+          } )
     ) }
   
   up_down_sampled_mat <- apply(non_zero, 2, up_down_sample)
@@ -81,6 +98,5 @@ scran_normalize <- function(expr_mat){
   
   return(expr_mat)
 }
-
-# scran_normalize(as.matrix(raw2))
-# cmp = calc_cpm(raw)
+# 
+# Up_Down_Sample_Matrix(raw)
