@@ -61,9 +61,10 @@ Up_Down_Sample_Matrix <- function(expr_mat,scale=1000) {
 
   keep_cols = colSums(expr_mat) > 0
   non_zero = expr_mat[,keep_cols]
-
+  
   non_zero@x = non_zero@x + rnorm(length(non_zero@x),mean = 0, sd = 0.5)
-  # 
+  
+  
   min_lib_size <- min(colSums(non_zero))
   
   up_down_sample <- function(x) {

@@ -19,7 +19,10 @@ v = 1:(length(files)/2)
 i=1
 size = c(50,100,500,1000)
 setwd("rds")
+<<<<<<< HEAD
 
+=======
+>>>>>>> fa3dab4d2058956daaffa912451d0084dbb34c24
 for (s in size) {
   print(paste(i,16,sep = "/"))
   raw = readRDS(files[2*i])

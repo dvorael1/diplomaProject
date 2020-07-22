@@ -99,41 +99,41 @@ for (i in v) {
   y = raw[gene2, ]
   omit = y<= 0 | omit | (x<=1 & y<=1)
   
-  stestraw = cor.test( x, y, method = "spearman", exact=F )[["estimate"]]
+  stestraw = round(cor.test( x, y, method = "spearman", exact=F )[["estimate"]],digits = 4)
   
   
   cpmx = cpm[gene1,]
   cpmy = cpm[gene2,]
-  stestcpm = cor.test( cpmx, cpmy, method = "spearman", exact=F ) [["estimate"]]
+  stestcpm = round(cor.test( cpmx, cpmy, method = "spearman", exact=F ) [["estimate"]],digits = 4)
   
   sfx = sf[gene1,]
   sfy = sf[gene2,]
-  stestsf = cor.test( sfx, sfy, method = "spearman", exact=F ) [["estimate"]]
+  stestsf = round(cor.test( sfx, sfy, method = "spearman", exact=F ) [["estimate"]],digits = 4)
   
   uqx = uq[gene1,]
   uqy = uq[gene2,]
-  stestuq = cor.test( uqx, uqy, method = "spearman", exact=F ) [["estimate"]]
+  stestuq = round(cor.test( uqx, uqy, method = "spearman", exact=F ) [["estimate"]],digits = 4)
   
   dsmx = dsm[gene1,]
   dsmy = dsm[gene2,]
-  stestdsm = cor.test( dsmx, dsmy, method = "spearman", exact=F ) [["estimate"]]
+  stestdsm = round(cor.test( dsmx, dsmy, method = "spearman", exact=F ) [["estimate"]],digits = 4)
   
   
   udsm50x = udsm50[gene1,]
   udsm50y = udsm50[gene2,]
-  stest50 = cor.test( udsm50x, udsm50y, method = "spearman", exact=F ) [["estimate"]]
+  stest50 = round(cor.test( udsm50x, udsm50y, method = "spearman", exact=F ) [["estimate"]],digits = 4)
   
   udsm100x = udsm100[gene1,]
   udsm100y = udsm100[gene2,]
-  stest100 = cor.test( udsm100x, udsm100y, method = "spearman", exact=F ) [["estimate"]]
+  stest100 = round(cor.test( udsm100x, udsm100y, method = "spearman", exact=F ) [["estimate"]],digits = 4)
   
   udsm500x = udsm500[gene1,]
   udsm500y = udsm500[gene2,]
-  stest500 = cor.test( udsm500x, udsm500y, method = "spearman", exact=F ) [["estimate"]]
+  stest500 = round(cor.test( udsm500x, udsm500y, method = "spearman", exact=F ) [["estimate"]],digits = 4)
   
   udsm1000x = udsm1000[gene1,]
   udsm1000y = udsm1000[gene2,]
-  stest1000 = cor.test( udsm1000x, udsm1000y, method = "spearman", exact=F ) [["estimate"]]
+  stest1000 = round(cor.test( udsm1000x, udsm1000y, method = "spearman", exact=F ) [["estimate"]],digits = 4)
   
   pdf( filename, 5, 4 )
   
